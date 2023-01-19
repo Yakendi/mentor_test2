@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -48,7 +48,6 @@
 				2F7B319F383592AF77598EE0 /* Pods-UnsplashAppCopy.debug.xcconfig */,
 				2348B28E8EB8310871C35E2E /* Pods-UnsplashAppCopy.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -130,7 +129,7 @@
 				};
 			};
 			buildConfigurationList = C6BA5EA529798E9600C25470 /* Build configuration list for PBXProject "UnsplashAppCopy" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
