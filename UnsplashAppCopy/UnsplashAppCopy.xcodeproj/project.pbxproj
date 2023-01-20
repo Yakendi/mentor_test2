@@ -19,9 +19,10 @@
 		C6BA5ECE2979AF2400C25470 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ECD2979AF2400C25470 /* NetworkManager.swift */; };
 		C6BA5ED02979AF5C00C25470 /* NetworkEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ECF2979AF5C00C25470 /* NetworkEndpoints.swift */; };
 		C6BA5ED22979AF6B00C25470 /* NetworkErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ED12979AF6B00C25470 /* NetworkErrorTypes.swift */; };
-		C6BA5ED4297AD90600C25470 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ED3297AD90600C25470 /* ImageModel.swift */; };
+		C6BA5ED4297AD90600C25470 /* UnsplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ED3297AD90600C25470 /* UnsplashModel.swift */; };
 		C6BA5ED6297ADE3200C25470 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ED5297ADE3200C25470 /* UserModel.swift */; };
 		C6BA5ED8297AE04800C25470 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ED7297AE04800C25470 /* LocationModel.swift */; };
+		C6BA5EDA297AFD2F00C25470 /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ED9297AFD2F00C25470 /* DetailImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,9 +42,10 @@
 		C6BA5ECD2979AF2400C25470 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C6BA5ECF2979AF5C00C25470 /* NetworkEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEndpoints.swift; sourceTree = "<group>"; };
 		C6BA5ED12979AF6B00C25470 /* NetworkErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorTypes.swift; sourceTree = "<group>"; };
-		C6BA5ED3297AD90600C25470 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		C6BA5ED3297AD90600C25470 /* UnsplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashModel.swift; sourceTree = "<group>"; };
 		C6BA5ED5297ADE3200C25470 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C6BA5ED7297AE04800C25470 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		C6BA5ED9297AFD2F00C25470 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				C6BA5EC12979A7C300C25470 /* Application */,
 				C6BA5EC22979A7E300C25470 /* Models */,
 				C6BA5EC32979A83D00C25470 /* Controllers */,
+				C6BA5EBB29798E9700C25470 /* Info.plist */,
 			);
 			path = UnsplashAppCopy;
 			sourceTree = "<group>";
@@ -117,7 +120,7 @@
 		C6BA5EC22979A7E300C25470 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C6BA5ED3297AD90600C25470 /* ImageModel.swift */,
+				C6BA5ED3297AD90600C25470 /* UnsplashModel.swift */,
 				C6BA5ED5297ADE3200C25470 /* UserModel.swift */,
 				C6BA5ED7297AE04800C25470 /* LocationModel.swift */,
 			);
@@ -131,6 +134,7 @@
 				C6BA5EB129798E9600C25470 /* TabBarController.swift */,
 				C6BA5EC52979ACC500C25470 /* ExploreViewController.swift */,
 				C6BA5EC72979AD0400C25470 /* FavoritesViewController.swift */,
+				C6BA5ED9297AFD2F00C25470 /* DetailImageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -138,7 +142,6 @@
 		C6BA5EC42979A8D100C25470 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C6BA5EBB29798E9700C25470 /* Info.plist */,
 				C6BA5EB629798E9700C25470 /* Assets.xcassets */,
 				C6BA5EB829798E9700C25470 /* LaunchScreen.storyboard */,
 			);
@@ -278,13 +281,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6BA5EC62979ACC500C25470 /* ExploreViewController.swift in Sources */,
-				C6BA5ED4297AD90600C25470 /* ImageModel.swift in Sources */,
+				C6BA5ED4297AD90600C25470 /* UnsplashModel.swift in Sources */,
 				C6BA5ED22979AF6B00C25470 /* NetworkErrorTypes.swift in Sources */,
 				C6BA5EB229798E9600C25470 /* TabBarController.swift in Sources */,
 				C6BA5ED8297AE04800C25470 /* LocationModel.swift in Sources */,
 				C6BA5EAE29798E9600C25470 /* AppDelegate.swift in Sources */,
 				C6BA5ECE2979AF2400C25470 /* NetworkManager.swift in Sources */,
 				C6BA5EC82979AD0400C25470 /* FavoritesViewController.swift in Sources */,
+				C6BA5EDA297AFD2F00C25470 /* DetailImageViewController.swift in Sources */,
 				C6BA5EB029798E9600C25470 /* SceneDelegate.swift in Sources */,
 				C6BA5ECB2979AD6A00C25470 /* CellForExploreImage.swift in Sources */,
 				C6BA5ED02979AF5C00C25470 /* NetworkEndpoints.swift in Sources */,

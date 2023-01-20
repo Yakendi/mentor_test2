@@ -36,7 +36,7 @@ class NetworkManager {
     }
     
     //MARK: - Explore image
-    func exploreImage(completion: @escaping (Result<ImageModel, NetworkErrorTypes>) -> Void) {
+    func exploreImage(completion: @escaping (Result<UnsplashModel, NetworkErrorTypes>) -> Void) {
         let url = baseURL
         let converedURL = url.convertToURL()
         

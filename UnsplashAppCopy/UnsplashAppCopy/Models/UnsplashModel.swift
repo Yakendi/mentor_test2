@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ImageModel: Codable {
+struct UnsplashModel: Codable {
     let id: String
     let created_at: String
     let description: String
@@ -15,7 +15,7 @@ struct ImageModel: Codable {
     let location: LocationModel
     let downloads: Int
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id
         case created_at = "createdAt"
         case description

@@ -13,7 +13,7 @@ struct UserModel: Codable {
     let name: String
     let instagram_username: String?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id
         case username
         case name
