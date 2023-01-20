@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ExploreViewController.swift
 //  UnsplashAppCopy
 //
 //  Created by Аслан Микалаев on 19.01.2023.
@@ -7,13 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ExploreViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-
-
 }
-
