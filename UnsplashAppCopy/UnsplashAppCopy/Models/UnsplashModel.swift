@@ -9,8 +9,8 @@ import Foundation
 
 struct UnsplashModel: Codable {
     let id: String
-    let created_at: String
-    let description: String
+    let createdAt: String
+    let description: String?
     let urls: ImageURLs
     let user: UserModel
     let location: LocationModel
@@ -18,7 +18,7 @@ struct UnsplashModel: Codable {
     
     private enum CodingKeys: String, CodingKey {
         case id
-        case created_at = "createdAt"
+        case createdAt = "created_at"
         case description
         case urls
         case user

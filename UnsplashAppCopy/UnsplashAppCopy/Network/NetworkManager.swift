@@ -29,7 +29,7 @@ class NetworkManager {
             do {
                 let unsplashData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(unsplashData))
-            } catch {
+            } catch let error {
                 completion(.failure(.error(error: error)))
             }
         }.resume()

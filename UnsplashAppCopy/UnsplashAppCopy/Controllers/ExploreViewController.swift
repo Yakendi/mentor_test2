@@ -11,8 +11,8 @@ import SnapKit
 class ExploreViewController: UIViewController {
     
     //MARK: - Public properties
-    let network = NetworkManager()
-    var dataForCell = [UnsplashModel]()
+	var collectionViewData: [ImageURLs] = []
+	let photoGalleryManager = PhotoGalleryManager.shared
     
     //MARK: - UI
     private lazy var collectionView: UICollectionView = {
@@ -41,6 +41,15 @@ class ExploreViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+		
+		// Subscription to images array
+		photoGalleryManager.loadedImagesClosure = { [weak self] imagesArray in
+			self?.collectionViewData = imagesArray
+			
+			DispatchQueue.main.async {
+				self?.collectionView.reloadData()
+			}
+		}
     }
 }
 
@@ -70,16 +79,18 @@ private extension ExploreViewController {
 //MARK: - Data source and Delegate
 extension ExploreViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+		collectionViewData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		// TODO: - Отображать данные (и лучше всего с activity indicator)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .systemOrange
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		// TODO: - Передача presentationModel и отображение детальной информации
         let detailVC = DetailImageViewController()
         present(detailVC, animated: true)
     }

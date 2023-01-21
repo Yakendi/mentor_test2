@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+// TODO: -
+// - Сделать список через таблицу
+// - при добавлении/удалении фотографии в избранное, отображать актуальный список избранного 
+
 class FavoritesViewController: UIViewController {
     
     //MARK: - Puclic properties
