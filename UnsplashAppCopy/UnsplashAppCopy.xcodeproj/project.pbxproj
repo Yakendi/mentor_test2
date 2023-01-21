@@ -23,6 +23,7 @@
 		C6BA5ED6297ADE3200C25470 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ED5297ADE3200C25470 /* UserModel.swift */; };
 		C6BA5ED8297AE04800C25470 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ED7297AE04800C25470 /* LocationModel.swift */; };
 		C6BA5EDA297AFD2F00C25470 /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5ED9297AFD2F00C25470 /* DetailImageViewController.swift */; };
+		C6BA5EDC297BD77500C25470 /* ImageURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5EDB297BD77500C25470 /* ImageURLs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		C6BA5ED5297ADE3200C25470 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C6BA5ED7297AE04800C25470 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		C6BA5ED9297AFD2F00C25470 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
+		C6BA5EDB297BD77500C25470 /* ImageURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				C6BA5ED3297AD90600C25470 /* UnsplashModel.swift */,
 				C6BA5ED5297ADE3200C25470 /* UserModel.swift */,
 				C6BA5ED7297AE04800C25470 /* LocationModel.swift */,
+				C6BA5EDB297BD77500C25470 /* ImageURLs.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				C6BA5ECB2979AD6A00C25470 /* CellForExploreImage.swift in Sources */,
 				C6BA5ED02979AF5C00C25470 /* NetworkEndpoints.swift in Sources */,
 				C6BA5ED6297ADE3200C25470 /* UserModel.swift in Sources */,
+				C6BA5EDC297BD77500C25470 /* ImageURLs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

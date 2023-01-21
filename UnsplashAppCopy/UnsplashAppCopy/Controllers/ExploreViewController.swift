@@ -6,21 +6,34 @@
 //
 
 import UIKit
+import SnapKit
 
 class ExploreViewController: UIViewController {
+    
+    //MARK: - Public properties
+    let network = NetworkManager()
+    var dataForCell = [UnsplashModel]()
     
     //MARK: - UI
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        layout.itemSize = CGSize(width: (view.frame.size.width - 40) / 3, height: (view.frame.size.width - 40) / 3)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(CellForExploreImage.self, forCellWithReuseIdentifier: "cell")
         return collectionView
     }()
     
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.searchBarStyle = .minimal
-        searchBar.barTintColor = .white
+        searchBar.placeholder = "Search"
         return searchBar
+    }()
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        return refresh
     }()
     
     //MARK: - Life cycle
@@ -35,15 +48,22 @@ class ExploreViewController: UIViewController {
 //MARK: - Setup views
 private extension ExploreViewController {
     func setup() {
-        
+        setupViews()
+        setupConstraints()
     }
     
     func setupViews() {
-        
+        view.backgroundColor = .white
+        view.addSubview(collectionView)
+        navigationItem.titleView = searchBar
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     func setupConstraints() {
-        
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
 

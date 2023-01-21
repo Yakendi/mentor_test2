@@ -11,6 +11,7 @@ struct UnsplashModel: Codable {
     let id: String
     let created_at: String
     let description: String
+    let urls: ImageURLs
     let user: UserModel
     let location: LocationModel
     let downloads: Int
@@ -19,6 +20,7 @@ struct UnsplashModel: Codable {
         case id
         case created_at = "createdAt"
         case description
+        case urls
         case user
         case location
         case downloads
