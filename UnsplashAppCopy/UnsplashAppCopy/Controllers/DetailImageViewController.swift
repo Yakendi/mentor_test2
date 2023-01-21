@@ -54,18 +54,22 @@ class DetailImageViewController: UIViewController {
         //username
         usernameLabel.text = "USERNAME"
         usernameLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         //instagram
         instagramLabel.text = "@instagram"
         instagramLabel.textColor = .systemGray
+        instagramLabel.translatesAutoresizingMaskIntoConstraints = false
         
         //description
         descriptionLabel.text = "Great pink color Great pink color Great pink color Great pink color Great pink color Great pink color"
         descriptionLabel.numberOfLines = 0
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         //location
         locationLabel.text = "\u{1F4CD}Iowa, US"
         locationLabel.textColor = .systemGray
+        locationLabel.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 

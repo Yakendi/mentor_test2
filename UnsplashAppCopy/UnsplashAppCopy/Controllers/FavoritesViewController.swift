@@ -20,7 +20,7 @@ class FavoritesViewController: UIViewController {
     //MARK: - UI
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(CellForFavoritesViewController.self, forCellReuseIdentifier: CellForFavoritesViewController.identifier)
         tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
@@ -62,7 +62,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
         20
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellForFavoritesViewController.identifier, for: indexPath) as! CellForFavoritesViewController
         return cell
     }
 }
