@@ -35,8 +35,8 @@ class CellForExploreImage: UICollectionViewCell {
     }
     
     //MARK: - Configurator
-    func configure(_ viewModel: UnsplashModel) {
-        if let imageURL = URL(string: viewModel.urls.thumb) {
+    func configure(_ viewModel: ImageURLs) {
+        if let imageURL = URL(string: viewModel.thumb ?? "nil") {
             DispatchQueue.global().async {
                                                 
                 let data = try? Data(contentsOf: imageURL)

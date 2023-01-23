@@ -12,7 +12,8 @@ class ExploreViewController: UIViewController {
     
     //MARK: - Public properties
 	var collectionViewData: [ImageURLs] = []
-	let photoGalleryManager = PhotoGalleryManager.shared
+//	let photoGalleryManager = PhotoGalleryManager.shared
+    let network = NetworkManager()
     
     //MARK: - UI
     private lazy var collectionView: UICollectionView = {
@@ -20,7 +21,7 @@ class ExploreViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         layout.itemSize = CGSize(width: (view.frame.size.width - 40) / 3, height: (view.frame.size.width - 40) / 3)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(CellForExploreImage.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(CellForExploreImage.self, forCellWithReuseIdentifier: CellForExploreImage.identifier)
         return collectionView
     }()
     
@@ -47,16 +48,34 @@ class ExploreViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+        fetch()
 		
 		// Subscription to images array
-		photoGalleryManager.loadedImagesClosure = { [weak self] imagesArray in
-			self?.collectionViewData = imagesArray
-
-			DispatchQueue.main.async {
-				self?.collectionView.reloadData()
-                self?.activityIndicator.stopAnimating()
-			}
-		}
+//		photoGalleryManager.loadedImagesClosure = { [weak self] imagesArray in
+//			self?.collectionViewData = imagesArray
+//
+//			DispatchQueue.main.async {
+//				self?.collectionView.reloadData()
+//                self?.activityIndicator.stopAnimating()
+//			}
+//		}
+    }
+    
+    //MARK: - Networking
+    private func fetch() {
+        network.exploreImage { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let responce):
+                self.collectionViewData = responce
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     //MARK: - Collection view refresh
@@ -79,11 +98,11 @@ private extension ExploreViewController {
     
     func setupViews() {
         view.backgroundColor = .white
+        navigationItem.titleView = searchBar
         view.addSubview(collectionView)
-        collectionView.addSubview(refreshControl)
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        navigationItem.titleView = searchBar
+        collectionView.addSubview(refreshControl)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -101,13 +120,14 @@ private extension ExploreViewController {
 //MARK: - Data source and Delegate
 extension ExploreViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		20
+        collectionViewData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		// TODO: - Отображать данные (и лучше всего с activity indicator)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .systemOrange
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellForExploreImage.identifier, for: indexPath) as! CellForExploreImage
+        let pictureModel = collectionViewData[indexPath.item]
+        cell.configure(pictureModel)
         activityIndicator.stopAnimating()
         return cell
     }

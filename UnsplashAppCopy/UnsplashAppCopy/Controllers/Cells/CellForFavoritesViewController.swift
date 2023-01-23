@@ -70,17 +70,17 @@ private extension CellForFavoritesViewController {
         pictureImageView.snp.makeConstraints { make in
             make.leading.top.equalToSuperview().offset(16)
             make.bottom.equalToSuperview().offset(-16)
-            make.height.equalTo(80)
-            make.width.equalTo(80)
+            make.height.equalTo(100)
+            make.width.equalTo(100)
             pictureImageView.layer.cornerRadius = 4
             pictureImageView.clipsToBounds = true
         }
         usernameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(pictureImageView.snp.trailing).offset(8)
+            make.leading.equalTo(pictureImageView.snp.trailing).offset(16)
             make.top.equalToSuperview().offset(16)
         }
         photoDescription.snp.makeConstraints { make in
-            make.leading.equalTo(pictureImageView.snp.trailing).offset(8)
+            make.leading.equalTo(pictureImageView.snp.trailing).offset(16)
             make.top.equalTo(usernameLabel.snp.bottom).offset(8)
             make.trailing.equalToSuperview().offset(-16)
         }
