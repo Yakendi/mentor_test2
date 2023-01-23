@@ -31,8 +31,14 @@ class ExploreViewController: UIViewController {
         return searchBar
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        return indicator
+    }()
+    
     private lazy var refreshControl: UIRefreshControl = {
         let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         return refresh
     }()
     
@@ -43,13 +49,23 @@ class ExploreViewController: UIViewController {
         setup()
 		
 		// Subscription to images array
-		photoGalleryManager.loadedImagesClosure = { [weak self] imagesArray in
-			self?.collectionViewData = imagesArray
-			
-			DispatchQueue.main.async {
-				self?.collectionView.reloadData()
-			}
-		}
+//		photoGalleryManager.loadedImagesClosure = { [weak self] imagesArray in
+//			self?.collectionViewData = imagesArray
+//
+//			DispatchQueue.main.async {
+//				self?.collectionView.reloadData()
+//                self?.activityIndicator.stopAnimating()
+//			}
+//		}
+    }
+    
+    //MARK: - Collection view refresh
+    @objc private func refreshData() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
     }
 }
 
@@ -64,6 +80,9 @@ private extension ExploreViewController {
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(collectionView)
+        collectionView.addSubview(refreshControl)
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         navigationItem.titleView = searchBar
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -73,19 +92,23 @@ private extension ExploreViewController {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
 }
 
 //MARK: - Data source and Delegate
 extension ExploreViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		collectionViewData.count
+		20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		// TODO: - Отображать данные (и лучше всего с activity indicator)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .systemOrange
+        activityIndicator.stopAnimating()
         return cell
     }
     

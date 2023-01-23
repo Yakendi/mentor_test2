@@ -18,7 +18,7 @@ class CellForFavoritesViewController: UITableViewCell {
     //MARK: - Setup cell
     private lazy var pictureImageView: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .systemOrange
         return image
