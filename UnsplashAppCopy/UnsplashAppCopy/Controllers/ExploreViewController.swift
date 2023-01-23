@@ -49,14 +49,14 @@ class ExploreViewController: UIViewController {
         setup()
 		
 		// Subscription to images array
-//		photoGalleryManager.loadedImagesClosure = { [weak self] imagesArray in
-//			self?.collectionViewData = imagesArray
-//
-//			DispatchQueue.main.async {
-//				self?.collectionView.reloadData()
-//                self?.activityIndicator.stopAnimating()
-//			}
-//		}
+		photoGalleryManager.loadedImagesClosure = { [weak self] imagesArray in
+			self?.collectionViewData = imagesArray
+
+			DispatchQueue.main.async {
+				self?.collectionView.reloadData()
+                self?.activityIndicator.stopAnimating()
+			}
+		}
     }
     
     //MARK: - Collection view refresh

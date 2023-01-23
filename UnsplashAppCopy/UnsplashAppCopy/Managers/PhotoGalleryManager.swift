@@ -7,47 +7,46 @@
 
 import Foundation
 
-struct PresentPhotoModel {
-	let image: String
-	let userAvatat: String
-	let firstName: String
-	let userName: String
-	let description: String
-	let location: String
-}
-
 final class PhotoGalleryManager {
 	
-	// MARK: - Observable
-	var favouritesImages: [ImageURLs] = []
-	var presentPhotoArray: [PresentPhotoModel] = []
-	
-	var loadedImagesClosure: (([ImageURLs]) -> Void)?
-	
-	// MARK: - Private
-	private let network = NetworkManager()
-	
-	// MARK:  -
-	static let shared = PhotoGalleryManager()
+    //MARK: - Singletone
+    static let shared = PhotoGalleryManager()
+    
+    // MARK: - Observable
+    var favouritesImages: [ImageURLs] = []
+    var presentPhotoArray: [PresentPhotoModel] = []
+    
+    var loadedImagesClosure: (([ImageURLs]) -> Void)?
+    
+    // MARK: - Private
+    private let network = NetworkManager()
+    
+    // MARK: - Constructor
 	private init() {
 		
-//		network.exploreImage { [weak self] result in
-//			switch result {
-//			case .success(let response):
-//				
-////				self?.presentPhotoArray = response.map { item -> PresentPhotoModel in
-////					return PresentPhotoModel(image: item.urls.full,
-////											 userAvatat: item.user.profileImage.medium,
-////											 firstName: item.user.name,
-////											 userName: item.user.username,
-////											 description: item.description ?? "",
-////											 location: item.user.location)
-////				}
-//				
-//				self?.loadedImagesClosure?(response.map { $0.urls })
-//			case .failure(let failure):
-//				print(failure.localizedDescription)
-//			}
-//		}
+        fetchImage()
 	}
+    
+    //MARK: - Fetch image
+    func fetchImage() {
+        network.exploreImage { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                
+                self.presentPhotoArray = response.map { item -> PresentPhotoModel in
+                    return PresentPhotoModel(image: item.urls.full,
+                                             userAvatar: item.user.profileImage.medium,
+                                             userName: item.user.username,
+                                             instagram: item.user.instagramUsername ?? "",
+                                             description: item.description ?? "",
+                                             location: item.user.location)
+                }
+                
+                self.loadedImagesClosure?(response.map { $0.urls })
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
+    }
 }

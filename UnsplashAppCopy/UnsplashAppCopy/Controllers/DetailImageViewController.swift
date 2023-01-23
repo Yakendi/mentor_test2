@@ -36,6 +36,16 @@ class DetailImageViewController: UIViewController {
         return button
     }()
     
+    private lazy var dismissButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        button.tintColor = .systemGray5
+        button.alpha = 0.7
+        return button
+    }()
+    
     let usernameLabel = UILabel()
     let instagramLabel = UILabel()
     let descriptionLabel = UILabel()
@@ -47,6 +57,11 @@ class DetailImageViewController: UIViewController {
         
         setup()
         fillLabels()
+    }
+    
+    //MARK: - Dismiss vc
+    @objc private func dismissVC() {
+        dismiss(animated: true)
     }
     
     //MARK: - Fill labels
@@ -83,6 +98,7 @@ private extension DetailImageViewController {
     func setupViews() {
         view.backgroundColor = .systemBackground
         view.addSubview(pictureImageView)
+        view.addSubview(dismissButton)
         view.addSubview(profileImageView)
         view.addSubview(usernameLabel)
         view.addSubview(instagramLabel)
@@ -92,11 +108,21 @@ private extension DetailImageViewController {
     }
     
     func setupConstraints() {
+        
         pictureImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.55)
+        }
+        
+        dismissButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(30)
+            make.width.equalTo(31)
+            dismissButton.contentHorizontalAlignment = .fill
+            dismissButton.contentVerticalAlignment = .fill
         }
         
         profileImageView.snp.makeConstraints { make in

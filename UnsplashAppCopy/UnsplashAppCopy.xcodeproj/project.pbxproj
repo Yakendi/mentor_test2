@@ -27,6 +27,7 @@
 		C6BA5EDC297BD77500C25470 /* ImageURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5EDB297BD77500C25470 /* ImageURLs.swift */; };
 		C6BA5EDE297BEBB900C25470 /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5EDD297BEBB900C25470 /* ProfileImageModel.swift */; };
 		C6BA5EE0297C4A6200C25470 /* CellForFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BA5EDF297C4A6200C25470 /* CellForFavoritesViewController.swift */; };
+		C6F338DC297EC207001E93F3 /* PresentPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F338DB297EC207001E93F3 /* PresentPhotoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		C6BA5EDB297BD77500C25470 /* ImageURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLs.swift; sourceTree = "<group>"; };
 		C6BA5EDD297BEBB900C25470 /* ProfileImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageModel.swift; sourceTree = "<group>"; };
 		C6BA5EDF297C4A6200C25470 /* CellForFavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForFavoritesViewController.swift; sourceTree = "<group>"; };
+		C6F338DB297EC207001E93F3 /* PresentPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentPhotoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				C6BA5ED7297AE04800C25470 /* LocationModel.swift */,
 				C6BA5EDB297BD77500C25470 /* ImageURLs.swift */,
 				C6BA5EDD297BEBB900C25470 /* ProfileImageModel.swift */,
+				C6F338DB297EC207001E93F3 /* PresentPhotoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				C6BA5ED4297AD90600C25470 /* UnsplashModel.swift in Sources */,
 				C6BA5ED22979AF6B00C25470 /* NetworkErrorTypes.swift in Sources */,
 				C6BA5EB229798E9600C25470 /* TabBarController.swift in Sources */,
+				C6F338DC297EC207001E93F3 /* PresentPhotoModel.swift in Sources */,
 				C6BA5EE0297C4A6200C25470 /* CellForFavoritesViewController.swift in Sources */,
 				C6BA5ED8297AE04800C25470 /* LocationModel.swift in Sources */,
 				C6BA5EAE29798E9600C25470 /* AppDelegate.swift in Sources */,
