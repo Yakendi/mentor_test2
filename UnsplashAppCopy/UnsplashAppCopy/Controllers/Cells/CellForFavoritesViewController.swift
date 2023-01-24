@@ -10,24 +10,25 @@ import SnapKit
 
 class CellForFavoritesViewController: UITableViewCell {
     
-    //MARK: - Identiifier
+    // MARK: - Identiifier
     static var identifier: String {
         return String(describing: self)
     }
     
-    //MARK: - Setup cell
-    private lazy var pictureImageView: UIImageView = {
+    // MARK: - UI
+    private var pictureImageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .systemOrange
+		image.layer.cornerRadius = 4
+		image.clipsToBounds = true
         return image
     }()
     
     let usernameLabel = UILabel()
     let photoDescription = UILabel()
     
-    //MARK: - Constructor
+    // MARK: - Constructor
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -41,15 +42,15 @@ class CellForFavoritesViewController: UITableViewCell {
     
     //MARK: - Fill labels
     private func fillLabels() {
-        //usernameLabel
+        
+		//usernameLabel
         usernameLabel.text = "USERNAME"
         usernameLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         //photoDescription
         photoDescription.text = "Photo description"
         photoDescription.textColor = .systemGray
         photoDescription.numberOfLines = 0
-        photoDescription.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 
@@ -61,24 +62,26 @@ private extension CellForFavoritesViewController {
     }
     
     func setupViews() {
-        addSubview(pictureImageView)
-        addSubview(usernameLabel)
-        addSubview(photoDescription)
+		contentView.addSubview(pictureImageView)
+		contentView.addSubview(usernameLabel)
+		contentView.addSubview(photoDescription)
+//        addSubview(pictureImageView)
+//        addSubview(usernameLabel)
+//        addSubview(photoDescription)
     }
     
     func setupConstraints() {
         pictureImageView.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().offset(-16)
-            make.height.equalTo(100)
-            make.width.equalTo(100)
-            pictureImageView.layer.cornerRadius = 4
-            pictureImageView.clipsToBounds = true
+			make.width.height.equalTo(100)
+			make.bottom.equalToSuperview().offset(-16)
+			make.leading.top.equalToSuperview().offset(16)
         }
+		
         usernameLabel.snp.makeConstraints { make in
             make.leading.equalTo(pictureImageView.snp.trailing).offset(16)
             make.top.equalToSuperview().offset(16)
         }
+		
         photoDescription.snp.makeConstraints { make in
             make.leading.equalTo(pictureImageView.snp.trailing).offset(16)
             make.top.equalTo(usernameLabel.snp.bottom).offset(8)

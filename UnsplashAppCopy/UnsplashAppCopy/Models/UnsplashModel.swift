@@ -14,8 +14,8 @@ struct UnsplashModel: Codable {
     let altDescription: String?
     let urls: ImageURLs
     let user: UserModel
-    let location: LocationModel
-    let downloads: Int
+    let location: LocationModel?
+    let downloads: Int?
     
     private enum CodingKeys: String, CodingKey {
         case id

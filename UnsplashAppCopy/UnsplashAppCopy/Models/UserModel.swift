@@ -11,7 +11,7 @@ struct UserModel: Codable {
     let id: String
     let username: String
     let name: String
-	let location: String
+	let location: String?
     let profileImage: ProfileImageModel
     let instagramUsername: String?
     

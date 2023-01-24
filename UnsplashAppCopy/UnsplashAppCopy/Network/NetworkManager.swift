@@ -14,7 +14,7 @@ class NetworkManager {
     
     //MARK: - Main request
     private func makeRequest<T: Codable>(_ url: URL, completion: @escaping (Result<T, NetworkErrorTypes>) -> Void) {
-        
+	
         URLSession.shared.dataTask(with: url) { data, responce, error in
             if let error = error {
                 completion(.failure(.error(error: error)))
@@ -36,7 +36,7 @@ class NetworkManager {
     }
     
     //MARK: - Explore image
-    func exploreImage(completion: @escaping (Result<[ImageURLs], NetworkErrorTypes>) -> Void) {
+    func exploreImage(completion: @escaping (Result<[UnsplashModel], NetworkErrorTypes>) -> Void) {
         let url = baseURL
         let converedURL = url.convertToURL()
         
