@@ -41,7 +41,7 @@ class DetailImageViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        button.tintColor = .systemGray5
+        button.tintColor = .systemBackground
         button.alpha = 0.7
         return button
     }()

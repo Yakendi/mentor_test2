@@ -28,6 +28,7 @@ class ExploreViewController: UIViewController {
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.searchBarStyle = .minimal
+        searchBar.backgroundColor = .systemBackground
         searchBar.placeholder = "Search"
         return searchBar
     }()
