@@ -93,29 +93,12 @@ class ExploreViewController: UIViewController {
 		}
 	}
 	
-	//MARK: - Networking
-	//    private func fetch() {
-	//        network.exploreImage { [weak self] result in
-	//            guard let self = self else { return }
-	//            switch result {
-	//            case .success(let responce):
-	//				print(responce)
-	////				self.collectionViewData = responce
-	////                DispatchQueue.main.async {
-	////                    self.collectionView.reloadData()
-	////                    self.activityIndicator.stopAnimating()
-	////                }
-	//            case .failure(let error):
-	//                print(error)
-	//            }
-	//        }
-	//    }
-	
 	//MARK: - Collection view refresh
 	@objc private func refreshData() {
-		self.collectionView.reloadData()
-		self.refreshControl.endRefreshing()
-	}
+        self.fetchImagesWithCompletionBlock()
+        self.collectionView.reloadData()
+        self.refreshControl.endRefreshing()
+    }
 }
 
 //MARK: - Setup views
@@ -126,7 +109,7 @@ private extension ExploreViewController {
 	}
 	
 	func setupViews() {
-		view.backgroundColor = .white
+		view.backgroundColor = .systemBackground
 		navigationItem.titleView = searchBar
 		view.addSubview(collectionView)
 		view.addSubview(activityIndicator)
@@ -138,8 +121,7 @@ private extension ExploreViewController {
 	
 	func setupConstraints() {
 		collectionView.snp.makeConstraints { make in
-			// make.edges.equalTo(view.safeAreaLayoutGuide)
-			make.edges.equalToSuperview()
+			 make.edges.equalTo(view.safeAreaLayoutGuide)
 		}
 		
 		activityIndicator.snp.makeConstraints { make in
@@ -157,9 +139,9 @@ extension ExploreViewController: UICollectionViewDataSource, UICollectionViewDel
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		// TODO: - Отображать данные (и лучше всего с activity indicator)
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellForExploreImage.identifier, for: indexPath) as! CellForExploreImage
+        cell.backgroundColor = .systemGray6
 		let pictureModel = collectionViewData[indexPath.item]
 		cell.configure(pictureModel)
-		activityIndicator.stopAnimating()
 		return cell
 	}
 	

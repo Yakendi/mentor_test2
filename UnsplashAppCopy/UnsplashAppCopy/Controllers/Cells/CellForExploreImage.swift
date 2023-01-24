@@ -34,6 +34,12 @@ class CellForExploreImage: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.imageView.image = nil
+    }
+    
     //MARK: - Configurator
     func configure(_ viewModel: ImageURLs) {
         if let imageURL = URL(string: viewModel.thumb ?? "nil") {

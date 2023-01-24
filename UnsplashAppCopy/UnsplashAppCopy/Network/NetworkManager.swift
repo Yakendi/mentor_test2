@@ -10,7 +10,7 @@ import Foundation
 class NetworkManager {
     
     //MARK: - Base URL
-    let baseURL = "https://api.unsplash.com/photos/?client_id=SR06pjmvFFAczVYEUE0htljhCG34JbLATNtVP5jrXpA&order_by=ORDER&per_page=30"
+    let baseURL = "https://api.unsplash.com/photos/random/?client_id=SR06pjmvFFAczVYEUE0htljhCG34JbLATNtVP5jrXpA&count=30"
     
     //MARK: - Main request
     private func makeRequest<T: Codable>(_ url: URL, completion: @escaping (Result<T, NetworkErrorTypes>) -> Void) {
