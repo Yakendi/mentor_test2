@@ -36,7 +36,7 @@ class TabBarController: UITabBarController {
         
         tabBar.layer.borderColor = UIColor.systemGray.cgColor
         tabBar.layer.borderWidth = 0.2
-        tabBar.tintColor = .systemOrange
+        tabBar.tintColor = .systemPink
     }
 }
 

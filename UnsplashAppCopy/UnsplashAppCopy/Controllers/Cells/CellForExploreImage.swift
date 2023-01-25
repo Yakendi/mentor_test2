@@ -16,7 +16,7 @@ class CellForExploreImage: UICollectionViewCell {
     }
     
     //MARK: - Setup cell
-    private lazy var imageView: UIImageView = {
+    private var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true

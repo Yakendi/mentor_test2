@@ -13,7 +13,7 @@ final class PhotoGalleryManager {
 	static let shared = PhotoGalleryManager()
 	
 	// MARK: - Observables
-	var favouritesImages: [ImageURLs] = []
+	var favouriteImages: [ImageURLs] = []
 	var presentPhotoArray: [PresentPhotoModel] = []
 	var loadedImagesClosure: (([ImageURLs]) -> Void)?
 
@@ -34,12 +34,10 @@ final class PhotoGalleryManager {
 			case .success(let response):
 				
 				self.presentPhotoArray = response.map { item -> PresentPhotoModel in
-					return PresentPhotoModel(image: item.urls.full ?? "",
-											 userAvatar: item.user.profileImage.medium,
+                    return PresentPhotoModel(image: item.urls.full ?? "",
+                                             userAvatar: item.user.profileImage.large,
 											 userName: item.user.username,
-											 instagram: item.user.instagramUsername ?? "",
-											 description: item.description ?? "",
-											 location: item.user.location ?? "")
+											 instagram: item.user.instagramUsername ?? "")
 				}
 
 				// self.loadedImagesClosure?(response.map { $0.urls })

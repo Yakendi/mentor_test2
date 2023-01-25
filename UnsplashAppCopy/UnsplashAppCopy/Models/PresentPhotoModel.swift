@@ -12,6 +12,4 @@ struct PresentPhotoModel {
     let userAvatar: String
     let userName: String
     let instagram: String?
-    let description: String?
-    let location: String?
 }

@@ -148,6 +148,8 @@ extension ExploreViewController: UICollectionViewDataSource, UICollectionViewDel
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		// TODO: - Передача presentationModel и отображение детальной информации
 		let detailVC = DetailImageViewController()
+        let pictureInfo = photoGalleryManager.presentPhotoArray[indexPath.item]
+        detailVC.model = pictureInfo
 		present(detailVC, animated: true)
 	}
 }
