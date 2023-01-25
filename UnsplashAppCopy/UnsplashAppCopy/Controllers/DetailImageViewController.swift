@@ -61,7 +61,7 @@ class DetailImageViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        fillLabels()
+        fillElements()
     }
     
     //MARK: - Dismiss vc
@@ -101,8 +101,8 @@ class DetailImageViewController: UIViewController {
         }
     }
     
-    //MARK: - Fill labels
-    private func fillLabels() {
+    //MARK: - Fill elements
+    private func fillElements() {
         
         //load images
         loadImages()
@@ -112,12 +112,10 @@ class DetailImageViewController: UIViewController {
         //username
         usernameLabel.text = model.userName
         usernameLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         //instagram
         instagramLabel.text = "@\(model.instagram ?? "")"
         instagramLabel.textColor = .systemGray
-        instagramLabel.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 
