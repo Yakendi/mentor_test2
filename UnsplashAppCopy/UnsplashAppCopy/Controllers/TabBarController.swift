@@ -10,7 +10,7 @@ import UIKit
 class TabBarController: UITabBarController {
     
     //MARK: - Public properties
-    let exploreVC = PicturesViewController()
+    let exploreVC = PicturesListViewController()
     let favoritesVC = FavoritesViewController()
     
     //MARK: - Life cycle
@@ -18,6 +18,7 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
        
         setupTabs()
+		_ = favoritesVC.view
     }
     
     //MARK: - Tabs

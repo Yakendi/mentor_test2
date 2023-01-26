@@ -7,23 +7,32 @@
 
 import Foundation
 
+protocol PhotoGalleryManagerDelegate: AnyObject {
+	func favouritesLists(array: [PresentPhotoModel])
+}
+
 final class PhotoGalleryManager {
 	
-	//MARK: - Singletone
+	// MARK: - Singletone
 	static let shared = PhotoGalleryManager()
 	
+	weak var delegate: PhotoGalleryManagerDelegate?
+	
 	// MARK: - Observables
-	var favouriteImages: [ImageURLs] = []
 	var presentPhotoArray: [PresentPhotoModel] = []
-	var loadedImagesClosure: (([ImageURLs]) -> Void)?
+	var loadedImagesClosure: (([ImageURLs]) -> Void)? // unused
+	
+	var favouritesArray: [PresentPhotoModel] = [] {
+		didSet {
+			self.delegate?.favouritesLists(array: favouritesArray)
+		}
+	}
 
 	// MARK: - Private
 	private let network = NetworkManager()
 	
 	// MARK: - Constructor
-	private init() {
-		
-		
+	private init() {				
 	}
 	
 	//MARK: - Fetch image

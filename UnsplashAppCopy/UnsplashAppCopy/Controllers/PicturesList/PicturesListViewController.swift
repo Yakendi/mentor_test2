@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class PicturesViewController: UIViewController {
+class PicturesListViewController: UIViewController {
 	
 	//MARK: - Public properties
 	var collectionViewData: [ImageURLs] = []
@@ -21,7 +21,8 @@ class PicturesViewController: UIViewController {
 		layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
 		layout.itemSize = CGSize(width: (view.frame.size.width - 40) / 3, height: (view.frame.size.width - 40) / 3)
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-		collectionView.register(CellForExploreImage.self, forCellWithReuseIdentifier: CellForExploreImage.identifier)
+		collectionView.register(PictureCollectionViewCell.self,
+								forCellWithReuseIdentifier: PictureCollectionViewCell.identifier)
 		return collectionView
 	}()
 	
@@ -102,7 +103,7 @@ class PicturesViewController: UIViewController {
 }
 
 //MARK: - Setup views
-private extension PicturesViewController {
+private extension PicturesListViewController {
 	func setup() {
 		setupViews()
 		setupConstraints()
@@ -131,14 +132,14 @@ private extension PicturesViewController {
 }
 
 //MARK: - Data source and Delegate
-extension PicturesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension PicturesListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		collectionViewData.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		// TODO: - Отображать данные (и лучше всего с activity indicator)
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellForExploreImage.identifier, for: indexPath) as! CellForExploreImage
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCollectionViewCell.identifier, for: indexPath) as! PictureCollectionViewCell
         cell.backgroundColor = .systemGray6
 		let pictureModel = collectionViewData[indexPath.item]
 		cell.configure(pictureModel)

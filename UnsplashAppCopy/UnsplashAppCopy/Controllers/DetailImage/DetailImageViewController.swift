@@ -10,12 +10,13 @@ import SnapKit
 
 class DetailImageViewController: UIViewController {
     
-    //MARK: - Public properties
+    // MARK: - Public properties
     var model: PresentPhotoModel?
-    var favoritesViewController = FavoritesViewController()
-    var cellForFavoriteImages = CellForFavoritesViewController()
+	private var photoGalleryManager = PhotoGalleryManager.shared
+    // var favoritesViewController = FavoritesViewController()
+    // var cellForFavoriteImages = CellForFavoritesViewController()
     
-    //MARK: - UI
+    // MARK: - UI
     private var pictureImageView: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
@@ -73,15 +74,16 @@ class DetailImageViewController: UIViewController {
     }
     
     @objc private func addToFavorites() {
-        cellForFavoriteImages.usernameLabel.text = model?.userName
-        cellForFavoriteImages.instagramUsername.text = model?.instagram        
-        print("press")
+		if let modelForFavourites = self.model {
+			self.photoGalleryManager.favouritesArray.append(modelForFavourites)
+			print("Image added to favourites. Total count: \(self.photoGalleryManager.favouritesArray.count)")
+		}
     }
     
     private func loadImages() {
         guard let model = model else { return }
         
-        //Picture
+        // Picture
         if let image = URL(string: model.image) {
             DispatchQueue.global(qos: .userInitiated).async {
                 let data = try? Data(contentsOf: image)
@@ -95,7 +97,7 @@ class DetailImageViewController: UIViewController {
             }
         }
         
-        //Avatar
+        // Avatar
         if let image = URL(string: model.userAvatar) {
             DispatchQueue.global(qos: .userInitiated).async {
                 let data = try? Data(contentsOf: image)

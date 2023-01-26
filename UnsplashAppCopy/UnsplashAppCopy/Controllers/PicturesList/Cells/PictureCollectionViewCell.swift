@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class CellForExploreImage: UICollectionViewCell {
+class PictureCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Identifier
     static var identifier: String {
@@ -59,7 +59,7 @@ class CellForExploreImage: UICollectionViewCell {
 }
 
 //MARK: - Setup views
-private extension CellForExploreImage {
+private extension PictureCollectionViewCell {
     func setup() {
         setupViews()
         setupConstraints()
