@@ -12,11 +12,14 @@ class DetailImageViewController: UIViewController {
     
     // MARK: - Public properties
     var model: PresentPhotoModel?
+	
+	// MARK: - Private properties
 	private var photoGalleryManager = PhotoGalleryManager.shared
-    // var favoritesViewController = FavoritesViewController()
-    // var cellForFavoriteImages = CellForFavoritesViewController()
     
     // MARK: - UI
+	private let usernameLabel = UILabel()
+	private let instagramLabel = UILabel()
+	
     private var pictureImageView: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
@@ -56,9 +59,6 @@ class DetailImageViewController: UIViewController {
         button.contentVerticalAlignment = .fill
         return button
     }()
-    
-    let usernameLabel = UILabel()
-    let instagramLabel = UILabel()
     
     //MARK: - Life cycle
     override func viewDidLoad() {

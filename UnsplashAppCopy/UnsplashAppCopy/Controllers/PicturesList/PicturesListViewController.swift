@@ -139,6 +139,7 @@ extension PicturesListViewController: UICollectionViewDataSource, UICollectionVi
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		// TODO: - Отображать данные (и лучше всего с activity indicator)
+		// DONE 
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCollectionViewCell.identifier, for: indexPath) as! PictureCollectionViewCell
         cell.backgroundColor = .systemGray6
 		let pictureModel = collectionViewData[indexPath.item]
@@ -148,6 +149,7 @@ extension PicturesListViewController: UICollectionViewDataSource, UICollectionVi
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		// TODO: - Передача presentationModel и отображение детальной информации
+		// DONE
 		let detailVC = DetailImageViewController()
         let pictureInfo = photoGalleryManager.presentPhotoArray[indexPath.item]
         detailVC.model = pictureInfo

@@ -5,7 +5,7 @@
 //  Created by Аслан Микалаев on 23.01.2023.
 //
 
-import Foundation
+import UIKit
 
 struct PresentPhotoModel {
     let image: String
