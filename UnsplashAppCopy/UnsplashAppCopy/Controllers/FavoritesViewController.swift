@@ -15,13 +15,14 @@ import SnapKit
 class FavoritesViewController: UIViewController {
     
     //MARK: - Puclic properties
-    var favoriteImages = [UIImage]()
+    var favoriteImages = [PresentPhotoModel]()
+    let photoManager = PhotoGalleryManager.shared
     
     //MARK: - UI
-    private lazy var tableView: UITableView = {
+    private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CellForFavoritesViewController.self, forCellReuseIdentifier: CellForFavoritesViewController.identifier)
-//        tableView.rowHeight = UITableView.automaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     
@@ -30,6 +31,11 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    func cellDataUpdate(_ picture: PresentPhotoModel) {
+        favoriteImages.append(picture)
+        tableView.reloadData()
     }
 }
 

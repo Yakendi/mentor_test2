@@ -1,5 +1,5 @@
 //
-//  ExploreViewController.swift
+//  PicturesViewController.swift
 //  UnsplashAppCopy
 //
 //  Created by Аслан Микалаев on 19.01.2023.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ExploreViewController: UIViewController {
+class PicturesViewController: UIViewController {
 	
 	//MARK: - Public properties
 	var collectionViewData: [ImageURLs] = []
@@ -102,7 +102,7 @@ class ExploreViewController: UIViewController {
 }
 
 //MARK: - Setup views
-private extension ExploreViewController {
+private extension PicturesViewController {
 	func setup() {
 		setupViews()
 		setupConstraints()
@@ -131,7 +131,7 @@ private extension ExploreViewController {
 }
 
 //MARK: - Data source and Delegate
-extension ExploreViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension PicturesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		collectionViewData.count
 	}

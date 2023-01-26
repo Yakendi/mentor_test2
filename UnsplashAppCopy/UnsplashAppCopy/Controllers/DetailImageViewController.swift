@@ -12,6 +12,8 @@ class DetailImageViewController: UIViewController {
     
     //MARK: - Public properties
     var model: PresentPhotoModel?
+    var favoritesViewController = FavoritesViewController()
+    var cellForFavoriteImages = CellForFavoritesViewController()
     
     //MARK: - UI
     private var pictureImageView: UIImageView = {
@@ -23,15 +25,16 @@ class DetailImageViewController: UIViewController {
     
     private var profileImageView: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 4
         image.clipsToBounds = true
         return image
     }()
     
-    private var addToFavoritesButton: UIButton = {
+    private lazy var addToFavoritesButton: UIButton = {
         let button = UIButton()
         button.setTitle("Add to favorites", for: .normal)
+        button.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         button.backgroundColor = .systemPink
         button.layer.cornerRadius = 10
@@ -42,7 +45,7 @@ class DetailImageViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
         button.tintColor = .white
         button.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
         button.layer.shadowColor = UIColor.systemGray2.cgColor
@@ -64,9 +67,15 @@ class DetailImageViewController: UIViewController {
         fillElements()
     }
     
-    //MARK: - Dismiss vc
-    @objc private func dismissVC() {
+    //MARK: - Methods
+    @objc private func dismissViewController() {
         dismiss(animated: true)
+    }
+    
+    @objc private func addToFavorites() {
+        cellForFavoriteImages.usernameLabel.text = model?.userName
+        cellForFavoriteImages.instagramUsername.text = model?.instagram        
+        print("press")
     }
     
     private func loadImages() {
@@ -101,7 +110,6 @@ class DetailImageViewController: UIViewController {
         }
     }
     
-    //MARK: - Fill elements
     private func fillElements() {
         
         //load images
@@ -155,8 +163,8 @@ private extension DetailImageViewController {
         profileImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.top.equalTo(pictureImageView.snp.bottom).offset(20)
-            make.height.equalTo(70)
-            make.width.equalTo(70)
+            make.height.equalTo(80)
+            make.width.equalTo(80)
         }
         
         usernameLabel.snp.makeConstraints { make in
@@ -173,7 +181,7 @@ private extension DetailImageViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
             make.height.equalTo(50)
-            make.width.equalTo(300)
+            make.width.equalTo(250)
         }
     }
 }

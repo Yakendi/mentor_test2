@@ -26,7 +26,7 @@ class CellForFavoritesViewController: UITableViewCell {
     }()
     
     let usernameLabel = UILabel()
-    let photoDescription = UILabel()
+    let instagramUsername = UILabel()
     
     // MARK: - Constructor
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -44,13 +44,12 @@ class CellForFavoritesViewController: UITableViewCell {
     private func fillLabels() {
         
 		//usernameLabel
-        usernameLabel.text = "USERNAME"
+//        usernameLabel.text = "USERNAME"
         usernameLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         
-        //photoDescription
-        photoDescription.text = "Photo description"
-        photoDescription.textColor = .systemGray
-        photoDescription.numberOfLines = 0
+        //instagramUsername
+//        instagramUsername.text = "Photo description"
+        instagramUsername.textColor = .systemGray
     }
 }
 
@@ -64,10 +63,7 @@ private extension CellForFavoritesViewController {
     func setupViews() {
 		contentView.addSubview(pictureImageView)
 		contentView.addSubview(usernameLabel)
-		contentView.addSubview(photoDescription)
-//        addSubview(pictureImageView)
-//        addSubview(usernameLabel)
-//        addSubview(photoDescription)
+		contentView.addSubview(instagramUsername)
     }
     
     func setupConstraints() {
@@ -82,7 +78,7 @@ private extension CellForFavoritesViewController {
             make.top.equalToSuperview().offset(16)
         }
 		
-        photoDescription.snp.makeConstraints { make in
+        instagramUsername.snp.makeConstraints { make in
             make.leading.equalTo(pictureImageView.snp.trailing).offset(16)
             make.top.equalTo(usernameLabel.snp.bottom).offset(8)
             make.trailing.equalToSuperview().offset(-16)
