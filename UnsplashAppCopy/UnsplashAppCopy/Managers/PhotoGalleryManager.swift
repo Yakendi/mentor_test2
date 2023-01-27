@@ -44,7 +44,8 @@ final class PhotoGalleryManager {
 				
 				// TODO: - Подумать как скачивать и сохранять картинки в структуре 
 				self.presentPhotoArray = response.map { item -> PresentPhotoModel in
-                    return PresentPhotoModel(image: item.urls.full ?? "",
+                    return PresentPhotoModel(image: item.urls.regular ?? "",
+                                             thumbImage: item.urls.thumb ?? "",
                                              userAvatar: item.user.profileImage.large,
 											 userName: item.user.username,
 											 instagram: item.user.instagramUsername ?? "")

@@ -9,6 +9,7 @@ import UIKit
 
 struct PresentPhotoModel {
     let image: String
+    let thumbImage: String
     let userAvatar: String
     let userName: String
     let instagram: String?

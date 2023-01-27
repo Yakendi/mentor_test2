@@ -10,7 +10,9 @@ import SnapKit
 
 // TODO: -
 // - Сделать список через таблицу
-// - при добавлении/удалении фотографии в избранное, отображать актуальный список избранного 
+// DONE
+// - при добавлении/удалении фотографии в избранное, отображать актуальный список избранного
+// DONE
 
 class FavoritesViewController: UIViewController {
     
@@ -74,6 +76,12 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
 	
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellForFavoritesViewController.identifier, for: indexPath) as! CellForFavoritesViewController
+        let favoriteImage = favoriteImages[indexPath.row]
+        cell.configure(favoriteImage)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

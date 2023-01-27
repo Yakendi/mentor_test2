@@ -60,6 +60,11 @@ class DetailImageViewController: UIViewController {
         return button
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        return indicator
+    }()
+    
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +97,7 @@ class DetailImageViewController: UIViewController {
                     let image = UIImage(data: data)
                     DispatchQueue.main.async {
                         self.pictureImageView.image = image
+                        self.activityIndicator.stopAnimating()
                     }
                 }
             }
@@ -144,6 +150,9 @@ private extension DetailImageViewController {
         view.addSubview(usernameLabel)
         view.addSubview(instagramLabel)
         view.addSubview(addToFavoritesButton)
+        view.addSubview(activityIndicator)
+        pictureImageView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
     }
     
     func setupConstraints() {
@@ -177,6 +186,7 @@ private extension DetailImageViewController {
         instagramLabel.snp.makeConstraints { make in
             make.leading.equalTo(profileImageView.snp.trailing).offset(10)
             make.top.equalTo(usernameLabel.snp.bottom).offset(5)
+            make.trailing.equalToSuperview().offset(-16)
         }
         
         addToFavoritesButton.snp.makeConstraints { make in
@@ -184,6 +194,10 @@ private extension DetailImageViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
             make.height.equalTo(50)
             make.width.equalTo(250)
+        }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalTo(pictureImageView.snp.center)
         }
     }
 }

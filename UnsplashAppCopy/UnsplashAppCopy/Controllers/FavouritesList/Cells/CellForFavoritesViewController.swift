@@ -19,7 +19,6 @@ class CellForFavoritesViewController: UITableViewCell {
     private var pictureImageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
-        image.backgroundColor = .systemOrange
 		image.layer.cornerRadius = 4
 		image.clipsToBounds = true
         return image
@@ -33,22 +32,41 @@ class CellForFavoritesViewController: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setup()
-        fillLabels()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Fill labels
-    private func fillLabels() {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pictureImageView.image = nil
+    }
+    
+    //MARK: - Configurator
+    func configure(_ viewModel: PresentPhotoModel) {
         
-		//usernameLabel
-//        usernameLabel.text = "USERNAME"
+        // image
+        if let imageURL = URL(string: viewModel.thumbImage) {
+            DispatchQueue.global().async {
+                
+                let data = try? Data(contentsOf: imageURL)
+                
+                if let data = data {
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async {
+                        self.pictureImageView.image = image
+                    }
+                }
+            }
+        }
+        
+		// usernameLabel
+        usernameLabel.text = viewModel.userName
         usernameLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         
-        //instagramUsername
-//        instagramUsername.text = "Photo description"
+        // instagramUsername
+        instagramUsername.text = viewModel.instagram
         instagramUsername.textColor = .systemGray
     }
 }
