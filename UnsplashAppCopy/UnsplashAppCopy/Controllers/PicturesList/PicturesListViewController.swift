@@ -19,7 +19,8 @@ class PicturesListViewController: UIViewController {
 	private lazy var collectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-		layout.itemSize = CGSize(width: (view.frame.size.width - 40) / 3, height: (view.frame.size.width - 40) / 3)
+		layout.itemSize = CGSize(width: (view.frame.size.width - 40) / 3,
+								 height: (view.frame.size.width - 40) / 3)
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.register(PictureCollectionViewCell.self,
 								forCellWithReuseIdentifier: PictureCollectionViewCell.identifier)
@@ -148,11 +149,13 @@ extension PicturesListViewController: UICollectionViewDataSource, UICollectionVi
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		// TODO: - Передача presentationModel и отображение детальной информации
-		// DONE
 		let detailVC = DetailImageViewController()
-        let pictureInfo = photoGalleryManager.presentPhotoArray[indexPath.item]
+		
+		let pictureInfo = photoGalleryManager.presentPhotoArray[indexPath.item]
         detailVC.model = pictureInfo
+		
+		// photoGalleryManager.presentPhotoArray != pictureInfo
+		
 		present(detailVC, animated: true)
 	}
 }

@@ -13,4 +13,5 @@ struct PresentPhotoModel {
     let userAvatar: String
     let userName: String
     let instagram: String
+	let isFavourite: Bool = false
 }

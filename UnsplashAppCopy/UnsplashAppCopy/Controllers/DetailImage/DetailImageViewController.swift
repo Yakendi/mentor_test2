@@ -11,8 +11,7 @@ import SnapKit
 class DetailImageViewController: UIViewController {
     
     // MARK: - Public properties
-    var model: PresentPhotoModel?
-    var isFavorite = false
+    var model: PresentPhotoModel!
 	
 	// MARK: - Private properties
 	private var photoGalleryManager = PhotoGalleryManager.shared
@@ -80,14 +79,15 @@ class DetailImageViewController: UIViewController {
     }
     
     @objc private func addToFavorites() {
-        if isFavorite {
+		var isFavourite = model.isFavourite
+		if isFavourite {
+			isFavourite.toggle()
             photoGalleryManager.favouritesArray.remove(at: 0)
             addToFavoritesButton.setTitle("Add to favorites", for: .normal)
-            isFavorite = false
         } else {
             if let modelForFavourites = self.model {
                 self.photoGalleryManager.favouritesArray.insert(modelForFavourites, at: 0)
-                self.isFavorite = true
+				isFavourite.toggle()
                 self.addToFavoritesButton.setTitle("Delete from favorites", for: .normal)
                 print("Image added to favourites. Total count: \(self.photoGalleryManager.favouritesArray.count)")
             }
