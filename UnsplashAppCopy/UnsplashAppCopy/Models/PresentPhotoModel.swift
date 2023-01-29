@@ -12,5 +12,5 @@ struct PresentPhotoModel {
     let thumbImage: String
     let userAvatar: String
     let userName: String
-    let instagram: String?
+    let instagram: String
 }

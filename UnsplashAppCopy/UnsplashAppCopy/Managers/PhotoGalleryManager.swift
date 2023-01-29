@@ -46,7 +46,7 @@ final class PhotoGalleryManager {
 				self.presentPhotoArray = response.map { item -> PresentPhotoModel in
                     return PresentPhotoModel(image: item.urls.regular ?? "",
                                              thumbImage: item.urls.thumb ?? "",
-                                             userAvatar: item.user.profileImage.large,
+                                             userAvatar: item.user.profileImage.medium,
 											 userName: item.user.username,
 											 instagram: item.user.instagramUsername ?? "")
 				}

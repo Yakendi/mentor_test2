@@ -66,7 +66,7 @@ class CellForFavoritesViewController: UITableViewCell {
         usernameLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         
         // instagramUsername
-        instagramUsername.text = viewModel.instagram
+        instagramUsername.text = "@\(viewModel.instagram)"
         instagramUsername.textColor = .systemGray
     }
 }

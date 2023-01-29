@@ -83,5 +83,9 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let detailVC = DetailImageViewController()
+        let pictureInfo = photoManager.presentPhotoArray[indexPath.row]
+        detailVC.model = pictureInfo
+        present(detailVC, animated: true)
     }
 }

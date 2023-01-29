@@ -12,6 +12,7 @@ class DetailImageViewController: UIViewController {
     
     // MARK: - Public properties
     var model: PresentPhotoModel?
+    var isFavorite = false
 	
 	// MARK: - Private properties
 	private var photoGalleryManager = PhotoGalleryManager.shared
@@ -79,10 +80,18 @@ class DetailImageViewController: UIViewController {
     }
     
     @objc private func addToFavorites() {
-		if let modelForFavourites = self.model {
-			self.photoGalleryManager.favouritesArray.append(modelForFavourites)
-			print("Image added to favourites. Total count: \(self.photoGalleryManager.favouritesArray.count)")
-		}
+        if isFavorite {
+            photoGalleryManager.favouritesArray.remove(at: 0)
+            addToFavoritesButton.setTitle("Add to favorites", for: .normal)
+            isFavorite = false
+        } else {
+            if let modelForFavourites = self.model {
+                self.photoGalleryManager.favouritesArray.insert(modelForFavourites, at: 0)
+                self.isFavorite = true
+                self.addToFavoritesButton.setTitle("Delete from favorites", for: .normal)
+                print("Image added to favourites. Total count: \(self.photoGalleryManager.favouritesArray.count)")
+            }
+        }
     }
     
     private func loadImages() {
@@ -130,7 +139,7 @@ class DetailImageViewController: UIViewController {
         usernameLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         
         //instagram
-        instagramLabel.text = "@\(model.instagram ?? "")"
+        instagramLabel.text = "@\(model.instagram)"
         instagramLabel.textColor = .systemGray
     }
 }
