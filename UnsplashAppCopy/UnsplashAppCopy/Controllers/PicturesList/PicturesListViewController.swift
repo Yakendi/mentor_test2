@@ -150,12 +150,16 @@ extension PicturesListViewController: UICollectionViewDataSource, UICollectionVi
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let detailVC = DetailImageViewController()
+		var pictureInfoModel = photoGalleryManager.presentPhotoArray[indexPath.item]
 		
-		let pictureInfo = photoGalleryManager.presentPhotoArray[indexPath.item]
-        detailVC.model = pictureInfo
+		// TODO: - Update 
+		let selectedIsFavourite = photoGalleryManager.favouritesArray.contains {
+			return $0 == pictureInfoModel
+		}
+		pictureInfoModel.isFavourite = selectedIsFavourite
 		
-		// photoGalleryManager.presentPhotoArray != pictureInfo
 		
+		detailVC.model = pictureInfoModel		
 		present(detailVC, animated: true)
 	}
 }

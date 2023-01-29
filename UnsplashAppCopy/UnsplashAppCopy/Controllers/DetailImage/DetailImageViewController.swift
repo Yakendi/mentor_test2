@@ -68,7 +68,7 @@ class DetailImageViewController: UIViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		
         setup()
         fillElements()
     }
@@ -78,70 +78,17 @@ class DetailImageViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    @objc private func addToFavorites() {
+	@objc private func addToFavorites() {
 		var isFavourite = model.isFavourite
+		
+		// TODO: - Менять title кнопки 
+		
 		if isFavourite {
-			isFavourite.toggle()
-            photoGalleryManager.favouritesArray.remove(at: 0)
-            addToFavoritesButton.setTitle("Add to favorites", for: .normal)
-        } else {
-            if let modelForFavourites = self.model {
-                self.photoGalleryManager.favouritesArray.insert(modelForFavourites, at: 0)
-				isFavourite.toggle()
-                self.addToFavoritesButton.setTitle("Delete from favorites", for: .normal)
-                print("Image added to favourites. Total count: \(self.photoGalleryManager.favouritesArray.count)")
-            }
-        }
-    }
-    
-    private func loadImages() {
-        guard let model = model else { return }
-        
-        // Picture
-        if let image = URL(string: model.image) {
-            DispatchQueue.global(qos: .userInitiated).async {
-                let data = try? Data(contentsOf: image)
-                
-                if let data = data {
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        self.pictureImageView.image = image
-                        self.activityIndicator.stopAnimating()
-                    }
-                }
-            }
-        }
-        
-        // Avatar
-        if let image = URL(string: model.userAvatar) {
-            DispatchQueue.global(qos: .userInitiated).async {
-                let data = try? Data(contentsOf: image)
-                
-                if let data = data {
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        self.profileImageView.image = image
-                    }
-                }
-            }
-        }
-    }
-    
-    private func fillElements() {
-        
-        //load images
-        loadImages()
-        
-        guard let model = model else { return }
-        
-        //username
-        usernameLabel.text = model.userName
-        usernameLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        
-        //instagram
-        instagramLabel.text = "@\(model.instagram)"
-        instagramLabel.textColor = .systemGray
-    }
+			photoGalleryManager.deleteFromFavourites(model)
+		} else {
+			photoGalleryManager.addToFavourites(model)
+		}
+	}
 }
 
 //MARK: - Setup views
@@ -150,6 +97,56 @@ private extension DetailImageViewController {
         setupViews()
         setupConstraints()
     }
+	
+	func fillElements() {
+		// load images
+		loadImages()
+		
+		let favouriteButtonTitle = model.isFavourite ? "Delete from favorites" : "Add to favorites"
+		addToFavoritesButton.setTitle(favouriteButtonTitle, for: .normal)
+		
+		// username
+		usernameLabel.text = model.userName
+		usernameLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+		
+		// instagram
+		instagramLabel.text = "@\(model.instagram)"
+		instagramLabel.textColor = .systemGray
+	}
+	
+	func loadImages() {
+		guard let model = model else { return }
+		
+		// Picture
+		if let image = URL(string: model.image) {
+			DispatchQueue.global(qos: .userInitiated).async {
+				let data = try? Data(contentsOf: image)
+				
+				if let data = data {
+					let image = UIImage(data: data)
+					DispatchQueue.main.async {
+						self.pictureImageView.image = image
+						self.activityIndicator.stopAnimating()
+					}
+				}
+			}
+		}
+		
+		// Avatar
+		if let image = URL(string: model.userAvatar) {
+			DispatchQueue.global(qos: .userInitiated).async {
+				let data = try? Data(contentsOf: image)
+				
+				if let data = data {
+					let image = UIImage(data: data)
+					DispatchQueue.main.async {
+						self.profileImageView.image = image
+					}
+				}
+			}
+		}
+	}
+	
     
     func setupViews() {
         view.backgroundColor = .systemBackground
