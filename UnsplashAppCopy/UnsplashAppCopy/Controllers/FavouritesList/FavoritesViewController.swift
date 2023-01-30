@@ -18,7 +18,7 @@ class FavoritesViewController: UIViewController {
     
     // MARK: - Puclic properties
     private var favoriteImages = [PresentPhotoModel]()
-	private let photoManager = PhotoGalleryManager.shared		
+	private let photoManager = PhotoGalleryManager.shared
     
     //MARK: - UI
     private var tableView: UITableView = {
@@ -33,7 +33,6 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-		photoManager.delegate = self
     }
 }
 
@@ -59,6 +58,7 @@ private extension FavoritesViewController {
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        photoManager.delegate = self
     }
     
     func setupConstraints() {
@@ -87,5 +87,16 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
         let pictureInfo = photoManager.presentPhotoArray[indexPath.row]
         detailVC.model = pictureInfo
         present(detailVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Remove") { [weak self] _, _, _ in
+            self?.favoriteImages.remove(at: indexPath.row)
+            self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self?.tableView.reloadData()
+        }
+        
+        let swipe = UISwipeActionsConfiguration(actions: [delete])
+        return swipe
     }
 }

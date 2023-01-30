@@ -37,7 +37,6 @@ class DetailImageViewController: UIViewController {
     
     private lazy var addToFavoritesButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Add to favorites", for: .normal)
         button.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         button.backgroundColor = .systemPink
@@ -70,7 +69,6 @@ class DetailImageViewController: UIViewController {
         super.viewDidLoad()
 		
         setup()
-        fillElements()
     }
     
     //MARK: - Methods
@@ -78,15 +76,21 @@ class DetailImageViewController: UIViewController {
         dismiss(animated: true)
     }
     
-	@objc private func addToFavorites() {
-		var isFavourite = model.isFavourite
+    @objc private func addToFavorites() {
+        
+		// TODO: - Менять title кнопки
+        // DONE
 		
-		// TODO: - Менять title кнопки 
-		
-		if isFavourite {
-			photoGalleryManager.deleteFromFavourites(model)
-		} else {
-			photoGalleryManager.addToFavourites(model)
+        if model.isFavourite {
+            photoGalleryManager.deleteFromFavourites(model)
+            addToFavoritesButton.setTitle("Add to favorites", for: .normal)
+            addToFavoritesButton.zoomIn()
+            model.isFavourite = false
+        } else {
+            photoGalleryManager.addToFavourites(model)
+            addToFavoritesButton.setTitle("Remove from favorites", for: .normal)
+            addToFavoritesButton.zoomIn()
+            model.isFavourite = true
 		}
 	}
 }
@@ -96,13 +100,14 @@ private extension DetailImageViewController {
     func setup() {
         setupViews()
         setupConstraints()
+        fillElements()
     }
 	
 	func fillElements() {
 		// load images
 		loadImages()
 		
-		let favouriteButtonTitle = model.isFavourite ? "Delete from favorites" : "Add to favorites"
+		let favouriteButtonTitle = model.isFavourite ? "Remove from favorites" : "Add to favorites"
 		addToFavoritesButton.setTitle(favouriteButtonTitle, for: .normal)
 		
 		// username
