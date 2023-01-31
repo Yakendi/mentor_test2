@@ -71,12 +71,12 @@ private extension FavoritesViewController {
 //MARK: - Collection view data source and delegate
 extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return favoriteImages.count
+        return photoManager.favouritesArray.count
     }
 	
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellForFavoritesViewController.identifier, for: indexPath) as! CellForFavoritesViewController
-        let favoriteImage = favoriteImages[indexPath.row]
+        let favoriteImage = photoManager.favouritesArray[indexPath.row]
         cell.configure(favoriteImage)
         return cell
     }
@@ -84,18 +84,20 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailVC = DetailImageViewController()
-        let pictureInfo = photoManager.presentPhotoArray[indexPath.row]
+        let pictureInfo = photoManager.favouritesArray[indexPath.row]
         detailVC.model = pictureInfo
         present(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Remove") { [weak self] _, _, _ in
-            self?.favoriteImages.remove(at: indexPath.row)
-            self?.tableView.deleteRows(at: [indexPath], with: .automatic)
-            self?.tableView.reloadData()
+        let delete = UIContextualAction(style: .destructive, title: "Remove") { [unowned self] _, _, _ in
+//            self?.photoManager.favouritesArray.remove(at: indexPath.row)
+            let selectedModel = self.photoManager.favouritesArray[indexPath.row]
+            self.photoManager.deleteFromFavourites(selectedModel)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+//            self.tableView.reloadData()
         }
-        
+
         let swipe = UISwipeActionsConfiguration(actions: [delete])
         return swipe
     }
