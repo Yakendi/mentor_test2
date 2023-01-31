@@ -33,12 +33,12 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-    }
+    }	
 }
 
 // MARK: - Delegate
 extension FavoritesViewController: PhotoGalleryManagerDelegate {
-	func favouritesLists(array: [PresentPhotoModel]) {
+	func updateFavouritesList(array: [PresentPhotoModel]) {
 		self.favoriteImages = array
 		self.tableView.reloadData()
 	}
@@ -90,12 +90,15 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Remove") { [unowned self] _, _, _ in
-//            self?.photoManager.favouritesArray.remove(at: indexPath.row)
-            let selectedModel = self.photoManager.favouritesArray[indexPath.row]
-            self.photoManager.deleteFromFavourites(selectedModel)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-//            self.tableView.reloadData()
+        let delete = UIContextualAction(style: .destructive, title: "Remove") { _, _, _ in
+			// attempt to delete row 0 from section 0 which only contains 0 rows before the update
+            
+			// Удаление модели из массив
+			let selectedModel = self.photoManager.favouritesArray[indexPath.row]
+			self.photoManager.deleteFromFavourites(selectedModel)
+			
+			// Удаления ячейки из таблицы
+			self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
 
         let swipe = UISwipeActionsConfiguration(actions: [delete])

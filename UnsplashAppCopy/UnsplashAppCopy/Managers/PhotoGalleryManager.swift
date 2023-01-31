@@ -7,8 +7,9 @@
 
 import Foundation
 
-protocol PhotoGalleryManagerDelegate: AnyObject {
-	func favouritesLists(array: [PresentPhotoModel])
+protocol PhotoGalleryManagerDelegate: AnyObject {	
+	// Используем, чтобы обновлять таблицу на экране списка избранных
+	func updateFavouritesList(array: [PresentPhotoModel])
 }
 
 final class PhotoGalleryManager {
@@ -21,11 +22,10 @@ final class PhotoGalleryManager {
 	var loadedImagesClosure: (([ImageURLs]) -> Void)? // unused
 
 	var presentPhotoArray: [PresentPhotoModel] = []
-	var favouritesArray: [PresentPhotoModel] = [] {
-		didSet {
-			self.delegate?.favouritesLists(array: favouritesArray)
-		}
-	}
+	
+	// 1.
+	//
+	var favouritesArray: [PresentPhotoModel] = []
 
 	// MARK: - Private
 	private let network = NetworkManager()
@@ -39,6 +39,8 @@ final class PhotoGalleryManager {
 		//
 		self.favouritesArray.append(model)
 		print("\(model.userName) image is added to favourites")
+		
+		self.delegate?.updateFavouritesList(array: favouritesArray)
 	}
 	
 	func deleteFromFavourites(_ model: PresentPhotoModel) {
