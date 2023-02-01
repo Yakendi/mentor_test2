@@ -51,7 +51,8 @@ final class PhotoGalleryManager {
 		
 		// 2
 		let filteredArray = self.favouritesArray.filter { $0 != model }
-		self.favouritesArray = filteredArray				
+		self.favouritesArray = filteredArray
+        self.delegate?.updateFavouritesList(array: favouritesArray)
 		
 		print("\(model.userName) image is deleted from list")
 	}

@@ -84,21 +84,24 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailVC = DetailImageViewController()
-        let pictureInfo = photoManager.favouritesArray[indexPath.row]
-        detailVC.model = pictureInfo
+        var pictureInfoModel = photoManager.favouritesArray[indexPath.row]
+        let selectedIsFavourite = photoManager.favouritesArray.contains {
+            return $0 == pictureInfoModel
+        }
+        pictureInfoModel.isFavourite = selectedIsFavourite
+        detailVC.model = pictureInfoModel
         present(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Remove") { _, _, _ in
-			// attempt to delete row 0 from section 0 which only contains 0 rows before the update
-            
+
 			// Удаление модели из массив
 			let selectedModel = self.photoManager.favouritesArray[indexPath.row]
 			self.photoManager.deleteFromFavourites(selectedModel)
-			
+
 			// Удаления ячейки из таблицы
-			self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
 
         let swipe = UISwipeActionsConfiguration(actions: [delete])
