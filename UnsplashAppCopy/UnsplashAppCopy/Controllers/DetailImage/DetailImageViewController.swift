@@ -79,10 +79,6 @@ class DetailImageViewController: UIViewController {
     }
     
     @objc private func addToFavorites() {
-        
-		// TODO: - Менять title кнопки
-        // DONE
-		
         if model.isFavourite {
             photoGalleryManager.deleteFromFavourites(model, isNeedReload: true)
             addToFavoritesButton.setTitle("Add to favorites", for: .normal)

@@ -16,17 +16,16 @@ protocol PhotoGalleryManagerDelegate: AnyObject {
 
 final class PhotoGalleryManager {
 	
+	// MARK: - Private properties
+	private let dataManager = DataBaseManager()
+	
 	// MARK: - Singletone
 	static let shared = PhotoGalleryManager()
 	weak var delegate: PhotoGalleryManagerDelegate?
 	
 	// MARK: - Observables
 	var loadedImagesClosure: (([ImageURLs]) -> Void)? // unused
-
 	var presentPhotoArray: [PresentPhotoModel] = []
-	
-	// 1.
-	//
 	var favouritesArray: [PresentPhotoModel] = []
 
 	// MARK: - Private
@@ -34,6 +33,8 @@ final class PhotoGalleryManager {
 	
 	// MARK: - Constructor
 	private init() {
+		
+		favouritesArray = dataManager.fetchFavouritesArray()
 	}
 	
 	// MARK: -
@@ -42,6 +43,7 @@ final class PhotoGalleryManager {
 		self.favouritesArray.append(model)
 		print("\(model.userName) image is added to favourites")
 		
+		self.dataManager.saveFavouriteModel(model)		
 		self.delegate?.updateFavouritesList()
 	}
 	
@@ -51,7 +53,7 @@ final class PhotoGalleryManager {
 		// 1
 //		var array = self.favouritesArray
 //		array.removeAll { $0 == model }
-//		self.favouritesArray = array
+//		self.favouritesArray = array				
 		
 		// 2
 		let filteredArray = self.favouritesArray.filter { $0 != model }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PresentPhotoEntity" representedClassName="PresentPhotoEntity" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="instagram" optional="YES" attributeType="String"/>
+        <attribute name="isFavourites" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="thumbImage" optional="YES" attributeType="String"/>
+        <attribute name="userAvatar" optional="YES" attributeType="String"/>
+        <attribute name="userName" optional="YES" attributeType="String"/>
+    </entity>
+</model>
