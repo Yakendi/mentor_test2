@@ -155,14 +155,14 @@ private extension DetailImageViewController {
     
     func setupViews() {
         view.backgroundColor = .systemBackground
-        view.addSubview(pictureImageView)
-        view.addSubview(dismissButton)
-        view.addSubview(profileImageView)
-        view.addSubview(usernameLabel)
-        view.addSubview(instagramLabel)
-        view.addSubview(addToFavoritesButton)
-        view.addSubview(activityIndicator)
-        pictureImageView.addSubview(activityIndicator)
+        view.addSubviews(pictureImageView,
+                         dismissButton,
+                         profileImageView,
+                         usernameLabel,
+                         instagramLabel,
+                         addToFavoritesButton,
+                         activityIndicator)
+        pictureImageView.addSubviews(activityIndicator)
         activityIndicator.startAnimating()
     }
     

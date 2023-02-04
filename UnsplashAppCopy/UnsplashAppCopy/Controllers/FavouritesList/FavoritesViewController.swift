@@ -55,7 +55,7 @@ private extension FavoritesViewController {
         view.backgroundColor = .systemBackground
         navigationItem.title = "Favorites"
         navigationController?.navigationBar.prefersLargeTitles = true
-        view.addSubview(tableView)
+        view.addSubviews(tableView)
         tableView.dataSource = self
         tableView.delegate = self
         photoManager.delegate = self

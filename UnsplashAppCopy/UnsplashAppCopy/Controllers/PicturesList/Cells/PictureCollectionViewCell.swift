@@ -66,7 +66,7 @@ private extension PictureCollectionViewCell {
     }
     
     func setupViews() {
-        addSubview(imageView)
+        addSubviews(imageView)
     }
     
     func setupConstraints() {

@@ -79,9 +79,7 @@ private extension CellForFavoritesViewController {
     }
     
     func setupViews() {
-		contentView.addSubview(pictureImageView)
-		contentView.addSubview(usernameLabel)
-		contentView.addSubview(instagramUsername)
+		contentView.addSubviews(pictureImageView, usernameLabel, instagramUsername)
     }
     
     func setupConstraints() {

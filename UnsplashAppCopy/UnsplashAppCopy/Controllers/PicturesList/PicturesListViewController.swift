@@ -113,10 +113,9 @@ private extension PicturesListViewController {
 	func setupViews() {
 		view.backgroundColor = .systemBackground
 		navigationItem.titleView = searchBar
-		view.addSubview(collectionView)
-		view.addSubview(activityIndicator)
+		view.addSubviews(collectionView, activityIndicator)
 		activityIndicator.startAnimating()
-		collectionView.addSubview(refreshControl)
+		collectionView.addSubviews(refreshControl)
 		collectionView.dataSource = self
 		collectionView.delegate = self
 	}
