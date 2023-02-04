@@ -9,7 +9,9 @@ import Foundation
 
 protocol PhotoGalleryManagerDelegate: AnyObject {	
 	// Используем, чтобы обновлять таблицу на экране списка избранных
-	func updateFavouritesList(array: [PresentPhotoModel])
+	func updateFavouritesList()
+	
+	
 }
 
 final class PhotoGalleryManager {
@@ -40,10 +42,12 @@ final class PhotoGalleryManager {
 		self.favouritesArray.append(model)
 		print("\(model.userName) image is added to favourites")
 		
-		self.delegate?.updateFavouritesList(array: favouritesArray)
+		self.delegate?.updateFavouritesList()
 	}
 	
-	func deleteFromFavourites(_ model: PresentPhotoModel) {
+	///
+	/// isNeedReload - указываем true если нам нужно вызывать tableView.reloadData
+	func deleteFromFavourites(_ model: PresentPhotoModel, isNeedReload: Bool) {
 		// 1
 //		var array = self.favouritesArray
 //		array.removeAll { $0 == model }
@@ -52,7 +56,10 @@ final class PhotoGalleryManager {
 		// 2
 		let filteredArray = self.favouritesArray.filter { $0 != model }
 		self.favouritesArray = filteredArray
-        self.delegate?.updateFavouritesList(array: favouritesArray)
+		
+		if isNeedReload {
+			self.delegate?.updateFavouritesList()
+		}
 		
 		print("\(model.userName) image is deleted from list")
 	}

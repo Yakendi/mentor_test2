@@ -13,6 +13,8 @@ class DetailImageViewController: UIViewController {
     // MARK: - Public properties
     var model: PresentPhotoModel!
 	
+	var reloadData: (() -> Void)?
+	
 	// MARK: - Private properties
 	private var photoGalleryManager = PhotoGalleryManager.shared
     
@@ -82,7 +84,7 @@ class DetailImageViewController: UIViewController {
         // DONE
 		
         if model.isFavourite {
-            photoGalleryManager.deleteFromFavourites(model)
+            photoGalleryManager.deleteFromFavourites(model, isNeedReload: true)
             addToFavoritesButton.setTitle("Add to favorites", for: .normal)
             addToFavoritesButton.zoomIn()
             model.isFavourite = false

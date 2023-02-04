@@ -17,7 +17,6 @@ import SnapKit
 class FavoritesViewController: UIViewController {
     
     // MARK: - Puclic properties
-    private var favoriteImages = [PresentPhotoModel]()
 	private let photoManager = PhotoGalleryManager.shared
     
     //MARK: - UI
@@ -38,8 +37,7 @@ class FavoritesViewController: UIViewController {
 
 // MARK: - Delegate
 extension FavoritesViewController: PhotoGalleryManagerDelegate {
-	func updateFavouritesList(array: [PresentPhotoModel]) {
-		self.favoriteImages = array
+	func updateFavouritesList() {
 		self.tableView.reloadData()
 	}
 }
@@ -83,6 +81,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+		
         let detailVC = DetailImageViewController()
         var pictureInfoModel = photoManager.favouritesArray[indexPath.row]
         let selectedIsFavourite = photoManager.favouritesArray.contains {
@@ -90,6 +89,11 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
         }
         pictureInfoModel.isFavourite = selectedIsFavourite
         detailVC.model = pictureInfoModel
+		
+		detailVC.reloadData = { [weak self] in
+			self?.tableView.reloadData()
+		}
+		
         present(detailVC, animated: true)
     }
     
@@ -98,7 +102,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
 
 			// Удаление модели из массив
 			let selectedModel = self.photoManager.favouritesArray[indexPath.row]
-			self.photoManager.deleteFromFavourites(selectedModel)
+			self.photoManager.deleteFromFavourites(selectedModel, isNeedReload: false)
 
 			// Удаления ячейки из таблицы
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
