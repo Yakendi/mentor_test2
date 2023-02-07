@@ -59,8 +59,9 @@ final class DataBaseManager: NSObject {
 		let viewContext = persistentContainer.viewContext
 		let _ = persistentContainer.newBackgroundContext()
 		
-		let toSaveEntity = NSEntityDescription.insertNewObject(forEntityName: "PresentPhotoEntity",
-															   into: viewContext) as! PresentPhotoEntity
+//		let toSaveEntity = NSEntityDescription.insertNewObject(forEntityName: "PresentPhotoEntity",
+//															   into: viewContext) as! PresentPhotoEntity
+        let toSaveEntity = PresentPhotoEntity(context: viewContext)
 		toSaveEntity.id = model.id
 		toSaveEntity.image = model.image
 		toSaveEntity.thumbImage = model.thumbImage
@@ -75,4 +76,24 @@ final class DataBaseManager: NSObject {
 			print(error.localizedDescription)
 		}
 	}
+    
+    func removeFromFavoritesModel(_ model: PresentPhotoModel) {
+        let viewContext = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<PresentPhotoEntity> = PresentPhotoEntity.fetchRequest()
+        let predicate = NSPredicate(format: "id like %@", model.id)
+        fetchRequest.predicate = predicate
+        fetchRequest.fetchLimit = 1
+        
+        do {
+            let objects = try viewContext.fetch(fetchRequest)
+            for object in objects {
+                viewContext.delete(object)
+            }
+            try viewContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+    }
+
 }
