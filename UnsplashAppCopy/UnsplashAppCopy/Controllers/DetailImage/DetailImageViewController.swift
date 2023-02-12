@@ -12,9 +12,7 @@ class DetailImageViewController: UIViewController {
     
     // MARK: - Public properties
     var model: PresentPhotoModel!
-	
-	var reloadData: (() -> Void)?
-	
+		
 	// MARK: - Private properties
 	private var photoGalleryManager = PhotoGalleryManager.shared
     

@@ -10,25 +10,20 @@ import Foundation
 protocol PhotoGalleryManagerDelegate: AnyObject {	
 	// Используем, чтобы обновлять таблицу на экране списка избранных
 	func updateFavouritesList()
-	
-	
 }
 
 final class PhotoGalleryManager {
-	
-	// MARK: - Private properties
-	private let dataManager = DataBaseManager()
-	
-	// MARK: - Singletone
-	static let shared = PhotoGalleryManager()
-	weak var delegate: PhotoGalleryManagerDelegate?
-	
-	// MARK: - Observables
-	var loadedImagesClosure: (([ImageURLs]) -> Void)? // unused
-	var presentPhotoArray: [PresentPhotoModel] = []
-	var favouritesArray: [PresentPhotoModel] = []
+    
+    // MARK: - Singletone
+    static let shared = PhotoGalleryManager()
+    
+    // MARK: - Public properties
+    var presentPhotoArray: [PresentPhotoModel] = []
+    var favouritesArray: [PresentPhotoModel] = []
+    weak var delegate: PhotoGalleryManagerDelegate?
 
-	// MARK: - Private
+    // MARK: - Private properties
+    private let dataManager = DataBaseManager()
 	private let network = NetworkManager()
 	
 	// MARK: - Constructor
@@ -37,7 +32,7 @@ final class PhotoGalleryManager {
 		favouritesArray = dataManager.fetchFavouritesArray()
 	}
 	
-	// MARK: -
+	// MARK: - Update favorites list
 	func addToFavourites(_ model: PresentPhotoModel) {
 		//
 		self.favouritesArray.append(model)

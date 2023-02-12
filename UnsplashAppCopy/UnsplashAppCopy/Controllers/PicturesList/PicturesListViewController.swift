@@ -13,7 +13,6 @@ class PicturesListViewController: UIViewController {
 	//MARK: - Public properties
 	var collectionViewData: [ImageURLs] = []
 	let photoGalleryManager = PhotoGalleryManager.shared
-	//    let network = NetworkManager()
 	
 	//MARK: - UI
 	private lazy var collectionView: UICollectionView = {
@@ -72,18 +71,6 @@ class PicturesListViewController: UIViewController {
 		fetchImagesWithCompletionBlock()
 	}
 	
-	// Subscription to images array
-	func fethcImagesWithSusbcribe() {
-		photoGalleryManager.loadedImagesClosure = { [weak self] imagesArray in
-			self?.collectionViewData = imagesArray
-			
-			DispatchQueue.main.async {
-				self?.collectionView.reloadData()
-				self?.activityIndicator.stopAnimating()
-			}
-		}
-	}
-	
 	func fetchImagesWithCompletionBlock() {
 		photoGalleryManager.fetchImages { [weak self] imagesArray in
 			self?.collectionViewData = imagesArray
@@ -138,8 +125,6 @@ extension PicturesListViewController: UICollectionViewDataSource, UICollectionVi
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		// TODO: - Отображать данные (и лучше всего с activity indicator)
-		// DONE 
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCollectionViewCell.identifier, for: indexPath) as! PictureCollectionViewCell
         cell.backgroundColor = .systemGray6
 		let pictureModel = collectionViewData[indexPath.item]

@@ -8,12 +8,6 @@
 import UIKit
 import SnapKit
 
-// TODO: -
-// - Сделать список через таблицу
-// DONE
-// - при добавлении/удалении фотографии в избранное, отображать актуальный список избранного
-// DONE
-
 class FavoritesViewController: UIViewController {
     
     // MARK: - Puclic properties
@@ -74,6 +68,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
 	
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellForFavoritesViewController.identifier, for: indexPath) as! CellForFavoritesViewController
+        cell.accessoryType = .disclosureIndicator
         let favoriteImage = photoManager.favouritesArray[indexPath.row]
         cell.configure(favoriteImage)
         return cell
