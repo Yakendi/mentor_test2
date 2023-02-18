@@ -78,7 +78,6 @@ final class PhotoGalleryManager {
 											 instagram: item.user.instagramUsername ?? "")
 				}
 
-				// self.loadedImagesClosure?(response.map { $0.urls })
 				completion(response.map { $0.urls })
 			case .failure(let failure):
 				print(failure.localizedDescription)

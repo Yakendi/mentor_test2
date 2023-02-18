@@ -85,10 +85,6 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
         pictureInfoModel.isFavourite = selectedIsFavourite
         detailVC.model = pictureInfoModel
 		
-		detailVC.reloadData = { [weak self] in
-			self?.tableView.reloadData()
-		}
-		
         present(detailVC, animated: true)
     }
     
